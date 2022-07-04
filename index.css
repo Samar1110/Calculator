@@ -168,7 +168,7 @@ tr:nth-child(odd) {
     }
 
     .history {
-        width: 100%;
+        width: 80%;
     }
     .heading{
         font-size: 3.5rem;
@@ -191,6 +191,12 @@ tr:nth-child(odd) {
     }
     .center{
         font-size: 2.5rem;
+    }
+    .history {
+        width: 80%;
+        margin: 30px auto 0 auto;
+        overflow: scroll;
+        /* color: white; */
     }
    
 }
