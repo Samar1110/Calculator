@@ -1,6 +1,8 @@
 const CACHE_KEY = "calculation_history";
 
 function checkForStorage() {
+    //to check whether browser supports local storage 
+    // console.log( (Storage) )
     return typeof (Storage) !== "undefined";
 }
 
@@ -10,15 +12,18 @@ function putHistory(data) {
         if (localStorage.getItem(CACHE_KEY) === null) {
             historyData = [];
         } else {
-            historyData = JSON.parse(localStorage.getItem(CACHE_KEY));
-        }
+            //give java script data
 
+            historyData = JSON.parse(localStorage.getItem(CACHE_KEY));
+  
+        }
+//add new data in begining of array
         historyData.unshift(data);
 
         if (historyData.length > 5) {
             historyData.pop();
         }
-
+        //sent json data
         localStorage.setItem(CACHE_KEY, JSON.stringify(historyData));
     }
 }
@@ -48,35 +53,3 @@ function renderHistory() {
 }
 
 renderHistory();
-
-const history = {
-    firstNumber: calculator.firstNumber,
-    secondNumber: calculator.displayNumber,
-    operator: calculator.operator,
-    result: result
-}
-
-function performCalculation() {
-    if (calculator.firstNumber == null || calculator.operator == null) {
-        alert("Anda belum menetapkan operator");
-        return;
-    }
-
-    let result = 0;
-    if (calculator.operator === "+") {
-        result = parseInt(calculator.firstNumber) + parseInt(calculator.displayNumber);
-    } else {
-        result = parseInt(calculator.firstNumber) - parseInt(calculator.displayNumber)
-    }
-
-    // objek yang akan dikirimkan sebagai argumen fungsi putHistory()
-    const history = {
-        firstNumber: calculator.firstNumber,
-        secondNumber: calculator.displayNumber,
-        operator: calculator.operator,
-        result: result
-    }
-    putHistory(history);
-    calculator.displayNumber = result;
-    renderHistory();
-}
